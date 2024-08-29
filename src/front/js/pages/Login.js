@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Login() {
+    const [showError, setShowError] = useState(false)
+
     const [loginData, setLoginData] = useState({
         email: "",
         password: ""
@@ -27,6 +29,8 @@ export default function Login() {
             navigate("/private");
         } catch (error) {
             console.log("Error de autenticación: " + error.response.data.error);
+            // Mostrar mensage de error
+            setShowError(true);
         }
     };
 
@@ -58,6 +62,11 @@ export default function Login() {
                         required
                     />
                 </div>
+                {showError && ( // Esto se muestra solo y exclusivamente si showError === true
+                    <div>
+                        <p className="text-danger">Tu email o tu contraseña no coinciden</p>
+                    </div>
+                )}
                 <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
             </form>
         </div>
