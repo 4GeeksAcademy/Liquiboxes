@@ -1,10 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Routes, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
-import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/Home";
-import SignUp from "./pages/Signup";
+import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Private from "./pages/Private";
 
@@ -15,10 +14,6 @@ import injectContext from "./store/appContext";  // Asegúrate de importar corre
 
 const Layout = () => {
     const basename = process.env.BASENAME || "";
-
-    if (!process.env.BACKEND_URL || process.env.BACKEND_URL === "") {
-        return <BackendURL />;
-    }
 
     return (
         <div>
