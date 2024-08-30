@@ -1,13 +1,15 @@
 import React from "react";
 import { BrowserRouter, Route, Routes, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 
 // Imports para las vistas de cliente
 import { Home } from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Private from "./pages/Private";
-import Cart from  "./pages/Cart"
+import Cart from "./pages/Cart"
 import ContactUs from "./pages/ContactUs"
 import PayingForm from "./pages/PayingForm"
 import Profile from "./pages/Profile"
@@ -30,38 +32,43 @@ import injectContext from "./store/appContext"; // Asegúrate de importar correc
 const Layout = () => {
   const basename = process.env.BASENAME || "";
 
+  console.log("ID Cliente Google:", process.env.REACT_APP_ID_CLIENTE_GOOGLE);
+
+
   return (
     <div>
-      <BrowserRouter basename={basename}>
-        <ScrollToTop>
-          <Navbar />
-          <Routes>
+      <GoogleOAuthProvider clientId={process.env.REACT_APP_ID_CLIENTE_GOOGLE}>
+        <BrowserRouter basename={basename}>
+          <ScrollToTop>
+            <Navbar />
+            <Routes>
 
-            {/* Vistas de cliente */}
-            <Route element={<Home />} path="/home" />
-            <Route element={<SignUp />} path="/signup" />
-            <Route element={<Login />} path="/" />
-            <Route element={<Private />} path="/private" />
-            <Route element={<Cart />} path="/cart" />
-            <Route element={<ContactUs />} path="/contactus" />
-            <Route element={<PayingForm />} path="/payingform" />
-            <Route element={<Profile />} path="/profile" />
-            <Route element={<Shops />} path="/shops" />
-            <Route element={<ShopDetail />} path="/shops/:id" />
-            <Route element={<ShopsSearch />} path="/shopssearch" />
+              {/* Vistas de cliente */}
+              <Route element={<Home />} path="/home" />
+              <Route element={<SignUp />} path="/signup" />
+              <Route element={<Login />} path="/" />
+              <Route element={<Private />} path="/private" />
+              <Route element={<Cart />} path="/cart" />
+              <Route element={<ContactUs />} path="/contactus" />
+              <Route element={<PayingForm />} path="/payingform" />
+              <Route element={<Profile />} path="/profile" />
+              <Route element={<Shops />} path="/shops" />
+              <Route element={<ShopDetail />} path="/shops/:id" />
+              <Route element={<ShopsSearch />} path="/shopssearch" />
 
-            {/* Vistas de Admin */}
-            <Route element={<AdminHome />} path="/adminhome" />
+              {/* Vistas de Admin */}
+              <Route element={<AdminHome />} path="/adminhome" />
 
-            {/* Vistas de Tienda */}
-            <Route element={<ShopHome />} path="/shophome" />
-            <Route element={<ShopSignUp />} path="/shopsignup" />
+              {/* Vistas de Tienda */}
+              <Route element={<ShopHome />} path="/shophome" />
+              <Route element={<ShopSignUp />} path="/shopsignup" />
 
-            <Route element={<h1>Not found!</h1>} path="*" />
-          </Routes>
-          <Footer />
-        </ScrollToTop>
-      </BrowserRouter>
+              <Route element={<h1>Not found!</h1>} path="*" />
+            </Routes>
+            <Footer />
+          </ScrollToTop>
+        </BrowserRouter>
+      </GoogleOAuthProvider>
     </div>
   );
 };

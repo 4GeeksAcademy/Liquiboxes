@@ -1,7 +1,6 @@
 # ignore all files starting with .
 .*
 mitoperni.code-profile
-
 node_modules
 
 # track this file .gitignore (i.e. do NOT ignore it)

@@ -73,6 +73,7 @@ export default function Login() {
                 <GoogleLogin
                     onSuccess={credentialResponse => {
                         console.log(credentialResponse);
+                        // Aquí deberías manejar la respuesta exitosa, por ejemplo, enviando el token al backend
                     }}
                     onError={() => {
                         console.log('Login Failed');
