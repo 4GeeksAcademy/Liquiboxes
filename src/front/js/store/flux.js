@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
             message: null,
+            cart: JSON.parse(localStorage.getItem("cart")) || [],
             shops: [
                 {
                     id: 1,
@@ -113,14 +114,92 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error("Error loading message from backend", error);
                 }
             },
-            changeColor: (index, color) => {
+            // Funciones originales para el backend (comentadas)
+            /*
+            fetchMysteryBoxDetails: async (id) => {
+                try {
+                    const resp = await fetch(`${process.env.BACKEND_URL}/api/mystery_box/${id}`);
+                    if (!resp.ok) throw new Error("Failed to fetch mystery box details");
+                    const data = await resp.json();
+                    return data;
+                } catch (error) {
+                    console.error("Error fetching mystery box details:", error);
+                    return null;
+                }
+            },
+
+            getCartItemsDetails: async () => {
                 const store = getStore();
-                const demo = store.demo.map((elm, i) => {
-                    if (i === index) elm.background = color;
-                    return elm;
-                });
-                setStore({ demo: demo });
-            }
+                const actions = getActions();
+                const detailedItems = await Promise.all(
+                    store.cart.map(async (cartItem) => {
+                        const details = await actions.fetchMysteryBoxDetails(cartItem.id);
+                        return details ? { ...details, quantity: cartItem.quantity } : null;
+                    })
+                );
+                return detailedItems.filter(item => item !== null);
+            },
+
+            getCartTotal: async () => {
+                const actions = getActions();
+                const cartItems = await actions.getCartItemsDetails();
+                return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+            },
+            */
+
+            // Funciones para datos hardcodeados
+            getHardcodedMysteryBoxDetails: (id) => {
+                const store = getStore();
+                const mysteryBox = store.mysteryBoxes.find(box => box.id === id);
+                if (mysteryBox) {
+                    const shop = store.shops.find(shop => shop.id === mysteryBox.storeId);
+                    return {
+                        ...mysteryBox,
+                        storeName: shop ? shop.name : 'Unknown Shop'
+                    };
+                }
+                return null;
+            },
+
+            getHardcodedCartItemsDetails: () => {
+                const store = getStore();
+                const actions = getActions();
+                return store.cart.map(cartItem => {
+                    const details = actions.getHardcodedMysteryBoxDetails(cartItem.id);
+                    return details ? { ...details, quantity: cartItem.quantity } : null;
+                }).filter(item => item !== null);
+            },
+
+            getHardcodedCartTotal: () => {
+                const actions = getActions();
+                const cartItems = actions.getHardcodedCartItemsDetails();
+                return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+            },
+
+            // Funciones comunes (no cambian)
+            addToCart: (id) => {
+                const store = getStore();
+                const existingItem = store.cart.find(item => item.id === id);
+                
+                if (existingItem) {
+                    const updatedCart = store.cart.map(item => 
+                        item.id === id ? {...item, quantity: item.quantity + 1} : item
+                    );
+                    setStore({ cart: updatedCart });
+                } else {
+                    const updatedCart = [...store.cart, { id, quantity: 1 }];
+                    setStore({ cart: updatedCart });
+                }
+                
+                localStorage.setItem("cart", JSON.stringify(getStore().cart));
+            },
+            
+            removeFromCart: (id) => {
+                const store = getStore();
+                const updatedCart = store.cart.filter(item => item.id !== id);
+                setStore({ cart: updatedCart });
+                localStorage.setItem("cart", JSON.stringify(updatedCart));
+            },
         }
     };
 };
