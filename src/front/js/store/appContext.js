@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import getState from "./flux.js";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 
 export const Context = React.createContext(null);
 
@@ -30,9 +32,14 @@ const injectContext = (PassedComponent) => {
         }
 
         return (
-            <Context.Provider value={state}>
-                <PassedComponent {...props} />
-            </Context.Provider>
+            <GoogleOAuthProvider clientId="1054056465742-6vnogsl1b5f6ikrgejrha02unfddbqu1.apps.googleusercontent.com">
+                <Context.Provider value={state}>
+                    <PassedComponent {...props} />
+                </Context.Provider>
+            </GoogleOAuthProvider>
+
+
+
         );
     };
 
