@@ -15,6 +15,7 @@ from api.admin import setup_admin
 from api.commands import setup_commands
 
 from api.users.users import users
+from api.shops.routes import shops
 
 # from models import Person
 
@@ -51,6 +52,8 @@ setup_commands(app)
 # Add all endpoints 
 app.register_blueprint(api, url_prefix='/api')
 app.register_blueprint(users, url_prefix='/users')
+app.register_blueprint(shops, url_prefix='/shops')
+
 
 ######## TODO Hablar con el equipo para la organización de los archivos de las rutas (estructura del proyecto)
 

@@ -23,6 +23,7 @@ import AdminHome from "./pages/Admins/AdminHome"
 // Vistas para Tiendas
 import ShopHome from "./pages/Shops/ShopHome"
 import ShopSignUp from "./pages/Shops/ShopSignUp"
+import CreateBox from "./pages/Shops/CreateBox";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -32,7 +33,6 @@ import injectContext from "./store/appContext"; // Asegúrate de importar correc
 const Layout = () => {
   const basename = process.env.BASENAME || "";
 
-  console.log("ID Cliente Google:", process.env.REACT_APP_ID_CLIENTE_GOOGLE);
 
 
   return (
@@ -62,6 +62,7 @@ const Layout = () => {
               {/* Vistas de Tienda */}
               <Route element={<ShopHome />} path="/shophome" />
               <Route element={<ShopSignUp />} path="/shopsignup" />
+              <Route element={<CreateBox />} path="/createbox" />
 
               <Route element={<h1>Not found!</h1>} path="*" />
             </Routes>
