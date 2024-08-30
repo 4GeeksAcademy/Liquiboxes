@@ -8,8 +8,23 @@ class User(db.Model):
     __tablename__ = "user"
     
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    surname = db.Column(db.String(120), nullable=False)
+    gender = db.Column(db.String(20), nullable=False)
+    address = db.Column(db.String(200), nullable=False)
+    postal_code = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(300), nullable=False)
+    upper_size = db.Column(db.String(10), nullable=False)
+    lower_size = db.Column(db.String(10), nullable=False)
+    cup_size = db.Column(db.String(10))
+    shoe_size = db.Column(db.String(10), nullable=False)
+    not_colors = db.Column(db.String(100))
+    stamps = db.Column(db.String(20), nullable=False)
+    fit = db.Column(db.String(20), nullable=False)
+    not_clothes = db.Column(db.String(100))
+    categories = db.Column(db.String(200), nullable=False)
+    profession = db.Column(db.String(100), nullable=False)
     is_active = db.Column(db.Boolean(), default=True, nullable=False)
     
     def __repr__(self):
@@ -24,7 +39,22 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "name": self.name,
+            "surname": self.surname,
             "email": self.email,
+            "gender": self.gender,
+            "address": self.address,
+            "postal_code": self.postal_code,
+            "upper_size": self.upper_size,
+            "lower_size": self.lower_size,
+            "cup_size": self.cup_size,
+            "shoe_size": self.shoe_size,
+            "not_colors": self.not_colors,
+            "stamps": self.stamps,
+            "fit": self.fit,
+            "not_clothes": self.not_clothes,
+            "categories": self.categories,
+            "profession": self.profession,
         }
 
 class Shop(db.Model):
