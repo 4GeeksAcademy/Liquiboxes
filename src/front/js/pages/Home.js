@@ -6,6 +6,8 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import Login from "./Login";
 
 
+// Este es el componente Home
+
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
