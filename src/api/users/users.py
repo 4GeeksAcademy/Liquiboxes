@@ -26,20 +26,39 @@ def get_all_users():
 @users.route('/register', methods=['POST'])
 def create_user():
     data = request.get_json()
-    email = data.get('email')
-    password = data.get('password')
+    
+    # Verificar si el usuario ya existe
+    if User.query.filter_by(email=data.get('email')).first():
+        return jsonify({'error': 'El usuario ya existe'}), 400
 
-    # Verifica si el usuario ya existe
-    user = User.query.filter_by(email=email).first()
-    if user:
-        return jsonify({'error': 'User already exists'}), 400 ## MIRAR ERROR NO SE ENVIA BIEN
+    # Crear un nuevo usuario
+    new_user = User(
+        name=data.get('name'),
+        surname=data.get('surname'),
+        gender=data.get('gender'),
+        address=data.get('address'),
+        postal_code=data.get('postalCode'),
+        email=data.get('email'),
+        upper_size=data.get('upperSize'),
+        lower_size=data.get('lowerSize'),
+        cup_size=data.get('cupSize'),
+        shoe_size=data.get('shoeSize'),
+        not_colors=','.join(data.get('notColors', [])),
+        stamps=data.get('stamps'),
+        fit=data.get('fit'),
+        not_clothes=','.join(data.get('notClothes', [])),
+        categories=','.join(data.get('categories', [])),
+        profession=data.get('profession')
+    )
+    new_user.set_password(data.get('password'))
 
-    # Crea un nuevo usuario
-    user = User(email=email)
-    user.set_password(password)
-    db.session.add(user)
-    db.session.commit()
-    return jsonify(user.serialize()), 201
+    try:
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify(new_user.serialize()), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': 'Error al crear el usuario: ' + str(e)}), 500
 
 @users.route('/login', methods=['POST'])
 def login():
