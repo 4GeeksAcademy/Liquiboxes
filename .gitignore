@@ -60,8 +60,6 @@ Thumbs.db
 *.tar
 *.zip
 
-# ignore node/grunt dependency directories
-node_modules/
 
 # webpack output
 dist/*
