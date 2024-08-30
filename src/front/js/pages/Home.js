@@ -6,7 +6,6 @@ import SearchBar from "../component/Home/SearchBar";
 
 
 
-
 // Este es el componente Home
 
 export const Home = () => {
@@ -14,13 +13,12 @@ export const Home = () => {
 
 	return (
 		 <div className="text-center mt-5">
-		 	<h1>Esto es el Home para clientes:</h1>
+		 	<h1>LiquiBoxes</h1>
 
 			<div>
 				<SearchBar />
 			</div>
 
-		 	
 		 </div>
 
 	);
