@@ -59,7 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     price: 49.99,
                     size: "Medium",
                     possibleItems: ["Vestido vintage", "Gafas de sol retro", "Broche antiguo", "Pañuelo de seda"],
-                    image: "/api/placeholder/300/300"
+                    image: "https://i.imgur.com/FGi5Wug.jpeg"
                 },
                 {
                     id: 102,
@@ -69,7 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     price: 79.99,
                     size: "Small",
                     possibleItems: ["Auriculares inalámbricos", "Powerbank", "Soporte para smartphone", "Cable multiusos"],
-                    image: "/api/placeholder/300/300"
+                    image: "https://i.imgur.com/OZdivIs.jpeg"
                 },
                 {
                     id: 103,
@@ -79,7 +79,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     price: 59.99,
                     size: "Large",
                     possibleItems: ["Salsa picante artesanal", "Mezcla de especias exóticas", "Snacks internacionales", "Té gourmet"],
-                    image: "/api/placeholder/300/300"
+                    image: "https://i.imgur.com/P0yKQDg.jpeg"
                 },
                 {
                     id: 104,
@@ -89,7 +89,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     price: 69.99,
                     size: "Medium",
                     possibleItems: ["Bandas de resistencia", "Botella de agua inteligente", "Toalla de microfibra", "Suplementos deportivos"],
-                    image: "/api/placeholder/300/300"
+                    image: "https://i.imgur.com/NuomJvP.jpeg"
                 },
                 {
                     id: 105,
@@ -99,7 +99,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     price: 39.99,
                     size: "Large",
                     possibleItems: ["Novela bestseller", "Libro de poesía", "Cómic o novela gráfica", "Marcapáginas artesanal"],
-                    image: "/api/placeholder/300/300"
+                    image: "https://i.imgur.com/x0rZvRf.jpeg"
                 }
             ]
         },
@@ -180,20 +180,20 @@ const getState = ({ getStore, getActions, setStore }) => {
             addToCart: (id) => {
                 const store = getStore();
                 const existingItem = store.cart.find(item => item.id === id);
-                
+
                 if (existingItem) {
-                    const updatedCart = store.cart.map(item => 
-                        item.id === id ? {...item, quantity: item.quantity + 1} : item
+                    const updatedCart = store.cart.map(item =>
+                        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
                     );
                     setStore({ cart: updatedCart });
                 } else {
                     const updatedCart = [...store.cart, { id, quantity: 1 }];
                     setStore({ cart: updatedCart });
                 }
-                
+
                 localStorage.setItem("cart", JSON.stringify(getStore().cart));
             },
-            
+
             removeFromCart: (id) => {
                 const store = getStore();
                 const updatedCart = store.cart.filter(item => item.id !== id);

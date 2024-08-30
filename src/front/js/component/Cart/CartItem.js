@@ -10,7 +10,8 @@ export default function CartItem ({ item, onRemove }) {
           <div className="col-md-8">
             <div className="card-body">
               <h5 className="card-title">{item.name}</h5>
-              <p className="card-text">Tienda: {item.storeName}</p>
+              <p className="card-text">Tienda: {item.storeId}</p> 
+              {/* En esta línea de arriba hace falta aplicar lógica para sacar el nombre de la tienda */}
               <p className="card-text">Cantidad: {item.quantity}</p>
               <p className="card-text"><strong>Precio: ${(item.price * item.quantity).toFixed(2)}</strong></p>
               <button onClick={() => onRemove(item.id)} className="btn btn-danger">
