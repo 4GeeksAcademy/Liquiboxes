@@ -38,16 +38,16 @@ const Layout = () => {
           <Routes>
 
             {/* Vistas de cliente */}
-            <Route element={<Home />} path="/" />
+            <Route element={<Home />} path="/home" />
             <Route element={<SignUp />} path="/signup" />
-            <Route element={<Login />} path="/login" />
+            <Route element={<Login />} path="/" />
             <Route element={<Private />} path="/private" />
             <Route element={<Cart />} path="/cart" />
             <Route element={<ContactUs />} path="/contactus" />
             <Route element={<PayingForm />} path="/payingform" />
             <Route element={<Profile />} path="/profile" />
-            <Route element={<ShopDetail />} path="/shopdetail/:id" />
             <Route element={<Shops />} path="/shops" />
+            <Route element={<ShopDetail />} path="/shops/:id" />
             <Route element={<ShopsSearch />} path="/shopssearch" />
 
             {/* Vistas de Admin */}
