@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function Login() {
     const [loginData, setLoginData] = useState({
@@ -30,6 +31,7 @@ export default function Login() {
         }
     };
 
+
     return (
         <div className="container mt-5">
             <h2>Iniciar Sesión</h2>
@@ -48,7 +50,7 @@ export default function Login() {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">Contraseña</label>
-                    <input 
+                    <input
                         type="password"
                         className="form-control"
                         id="password"
@@ -59,7 +61,16 @@ export default function Login() {
                     />
                 </div>
                 <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
+                <GoogleLogin
+                    onSuccess={credentialResponse => {
+                        console.log(credentialResponse);
+                    }}
+                    onError={() => {
+                        console.log('Login Failed');
+                    }}
+                />
             </form>
         </div>
     );
+
 }
