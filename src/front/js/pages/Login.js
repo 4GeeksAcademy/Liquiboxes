@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
+import { Context } from "../store/appContext";
 
 export default function Login() {
+    const {store, actions} = useContext(Context)
     const [showError, setShowError] = useState(false)
 
     const [loginData, setLoginData] = useState({
@@ -80,6 +82,10 @@ export default function Login() {
                     }}
                 />
             </form>
+
+            <div className="alert alert-info">
+		 		{store.message || "Loading message from the backend (make sure your python backend is running)..."}
+		 	</div>
         </div>
     );
 
