@@ -1,7 +1,5 @@
 # ignore all files starting with .
 .*
-mitoperni.code-profile
-node_modules
 
 # track this file .gitignore (i.e. do NOT ignore it)
 !.gitignore
@@ -61,6 +59,8 @@ Thumbs.db
 *.tar
 *.zip
 
+# ignore node/grunt dependency directories
+node_modules/
 
 # webpack output
 dist/*
