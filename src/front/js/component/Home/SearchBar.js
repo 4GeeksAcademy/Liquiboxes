@@ -9,7 +9,7 @@ export default function SearchBar() {
     };
 
     // Función para manejar el submit del formulario
-    const handleSubmit = async (event) => {
+    const handleSubmitSearch = async (event) => {
         event.preventDefault();
         console.log("Valor del input al hacer submit:", search);
 
@@ -17,7 +17,7 @@ export default function SearchBar() {
     };
 
     return (
-        <form className="d-flex align-items-center p-2" role="search" onSubmit={handleSubmit}>
+        <form className="d-flex align-items-center p-2" role="search" onSubmit={handleSubmitSearch}>
             <input
                 className="form-control border-0 border-bottom shadow"
                 type="search"
