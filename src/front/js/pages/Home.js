@@ -16,8 +16,9 @@ export const Home = () => {
 		 	<h1>LiquiBoxes</h1>
 
 			<div>
-				<SearchBar />
+				<SearchBar />				
 			</div>
+			
 
 		 </div>
 
