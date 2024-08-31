@@ -7,7 +7,7 @@ export default function Private() {
     useEffect(() => {
         const token = sessionStorage.getItem("token");
         if (!token) {
-            navigate("/login");
+            navigate("/");
         }
     }, [navigate]);
 
