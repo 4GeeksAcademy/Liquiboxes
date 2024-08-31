@@ -36,7 +36,7 @@ export const Home = () => {
                 <SearchBar />
 
                 {/* Contenedor de desplazamiento horizontal */}
-                <div className="horizontal-scroll-container">
+                <div className="d-flex">
                     {cardData.map((card, index) => (
                         <ScrollHorizontal
                             key={index}
