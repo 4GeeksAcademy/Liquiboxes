@@ -5,3 +5,25 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+
+/* home.css */
+
+.horizontal-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem; /* Espacio entre las tarjetas */
+    padding: 1rem; /* Espaciado interno del contenedor */
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 10px;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555; 
+}
