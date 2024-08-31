@@ -49,13 +49,26 @@ class User(db.Model):
             "lower_size": self.lower_size,
             "cup_size": self.cup_size,
             "shoe_size": self.shoe_size,
-            "not_colors": self.not_colors,
+            "not_colors": self.not_colors.split(',') if self.not_colors else [],
             "stamps": self.stamps,
             "fit": self.fit,
-            "not_clothes": self.not_clothes,
-            "categories": self.categories,
+            "not_clothes": self.not_clothes.split(',') if self.not_clothes else [],
+            "categories": self.categories.split(',') if self.categories else [],
             "profession": self.profession,
         }
+    
+    @classmethod
+    def deserialize(cls, data):
+        user = cls()
+        for key, value in data.items():
+            if key in ['not_colors', 'not_clothes', 'categories']:
+                if isinstance(value, list):
+                    setattr(user, key, ','.join(value) if value else None)
+                else:
+                    setattr(user, key, value)
+            elif hasattr(user, key):
+                setattr(user, key, value)
+        return user
 
 class Shop(db.Model):
     __tablename__ = "shop"

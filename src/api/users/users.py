@@ -78,4 +78,39 @@ def private():
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
 
+@users.route('/profile', methods=['GET'])
+@jwt_required()
+def get_profile():
+    current_user_email = get_jwt_identity()
+    user = User.query.filter_by(email=current_user_email).first()
+    if not user:
+        return jsonify({"error": "Usuario no encontrado"}), 404
+    return jsonify(user.serialize()), 200
+
+@users.route('/profile', methods=['PATCH'])
+@jwt_required()
+def update_profile():
+    current_user_email = get_jwt_identity()
+    user = User.query.filter_by(email=current_user_email).first()
+    
+    if not user:
+        return jsonify({"error": "Usuario no encontrado"}), 404
+    
+    data = request.json
+    
+    for field, value in data.items():
+        if field in ['not_colors', 'not_clothes', 'categories']:
+            if isinstance(value, list):
+                value = ','.join(value)
+            setattr(user, field, value)
+        elif hasattr(user, field) and field not in ['id', 'email', 'password_hash']:
+            setattr(user, field, value)
+    
+    try:
+        db.session.commit()
+        return jsonify(user.serialize()), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 400
+
 

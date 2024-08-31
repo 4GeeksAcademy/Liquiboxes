@@ -28,11 +28,14 @@ export default function Login() {
                 headers: { "Content-Type": "application/json" },
             });
             console.log("Usuario autenticado:", response.data);
-            sessionStorage.setItem("token", response.data.token);
-            navigate("/private");
+            if (response.data.access_token) {
+                sessionStorage.setItem("token", response.data.access_token);
+                navigate("/profile");
+            } else {
+                throw new Error("No se recibió el token de acceso");
+            }
         } catch (error) {
-            console.log("Error de autenticación: " + error.response.data.error);
-            // Mostrar mensage de error
+            console.log("Error de autenticación:", error);
             setShowError(true);
         }
     };
