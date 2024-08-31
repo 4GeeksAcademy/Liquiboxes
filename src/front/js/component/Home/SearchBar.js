@@ -17,6 +17,7 @@ export default function SearchBar() {
     };
 
     return (
+      <div>
         <form className="d-flex align-items-center p-2" role="search" onSubmit={handleSubmitSearch}>
             <input
                 className="form-control border-0 border-bottom shadow"
@@ -30,5 +31,6 @@ export default function SearchBar() {
                 Search
             </button>
         </form>
+</div>
     );
 }
