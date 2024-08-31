@@ -26,7 +26,6 @@ export const Home = () => {
             text: 'This is the third card.',
             link: '#',
         },
-        // Puedes agregar más objetos aquí para más tarjetas
     ];
 
     return (
